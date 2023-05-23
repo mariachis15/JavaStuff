@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the coordinates for the first point: ");
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        Point point1 = new Point(x1, y1);
+        System.out.println("Enter the coordinates for the second point: ");
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
+        Point point2 = new Point(x2, y2);
+        System.out.println("Enter the coordinates for the third point: ");
+        int x3 = sc.nextInt();
+        int y3 = sc.nextInt();
+        Point point3 = new Point(x3, y3);
+
+        //sides
+        double a = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+        double b = Math.sqrt(Math.pow((x3 - x1), 2) + Math.pow((y3 - y1), 2));
+        double c = Math.sqrt(Math.pow((x3 - x2), 2) + Math.pow((y3 - y2), 2));
+
+        double max = Math.max(a, b);
+        double hypotenuse = Math.max(max, c);
+        double cathetus1 = 0, cathetus2 = 0;
+        if (a == hypotenuse) {
+            cathetus1 = b;
+            cathetus2 = c;
+        } else if (b == hypotenuse) {
+            cathetus1 = a;
+            cathetus2 = c;
+        } else if (c == hypotenuse) {
+            cathetus1 = a;
+            cathetus2 = b;
+        }
+        if (point1.getX() == point2.getX() && point2.getX() == point3.getX() || point1.getY() == point2.getY() && point2.getY() == point3.getY()) {
+            throw new ImpossibleTriangle("ImpossibleTriangle exception.");
+        }
+        if (cathetus1 * cathetus1 + cathetus2 * cathetus2 < hypotenuse * hypotenuse) {
+            System.out.println("The triangle is obtuse.");
+        } else if (cathetus1 * cathetus1 + cathetus2 * cathetus2 > hypotenuse * hypotenuse) {
+            throw new SharpTriangleException("SharpTriangle exception.");
+        } else if (cathetus1 * cathetus1 + cathetus2 * cathetus2 == hypotenuse * hypotenuse) {
+            throw new RightAngleTriangle("RightAngleTriangle exception.");
+        }
+
+
+    }
+}

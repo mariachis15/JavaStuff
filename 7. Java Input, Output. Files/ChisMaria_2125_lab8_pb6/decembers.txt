@@ -1,0 +1,3 @@
+Person{firstName='Chis', lastName='Maria', phoneNumber='40756445334', dateOfBirth='12.dec.92', facebookLink='hdsjfdjsgjds.com'}
+Person{firstName='Chis', lastName='Maria', phoneNumber='40756445334', dateOfBirth='12.dec.92', facebookLink='hdsjfdjsgjds.com'}
+Person{firstName='Chis', lastName='Maria', phoneNumber='40756445334', dateOfBirth='12.dec.92', facebookLink='hdsjfdjsgjds.com'}

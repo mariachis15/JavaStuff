@@ -1,0 +1,66 @@
+public interface Adder {
+    double sum(double num1, double num2);
+}
+public interface Subtractor {
+    double subtract(double num1, double num2);
+}
+public interface Multiplier {
+    double multiply(double num1, double num2);
+}
+public interface Divider {
+    double division(double num1, double num2);
+}
+public interface RootExtractor {
+    double sqrt(double num1, double num2);
+}
+public interface PowUpper {
+    double pow(double num1, double num2);
+}
+
+
+public class Operation implements Adder, Subtractor, Multiplier, Divider, RootExtractor, PowUpper{
+    public double sum(double a, double b) {
+        return a + b;
+    }
+
+    public double subtract(double a, double b) {
+        return a - b;
+    }
+
+    public double multiply(double a, double b) {
+        return a * b;
+    }
+
+    public double division(double a, double b) {
+        return a / b;
+    }
+
+    public double sqrt(double a, double b) {
+        return Math.sqrt(a + b);
+    }
+
+    public double pow(double a, double b) {
+        return Math.pow(a, b);
+    }
+
+}
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Operation operation = new Operation();
+        System.out.print("a = ");
+        double a = sc.nextDouble();
+        System.out.print("b = ");
+        double b = sc.nextDouble();
+        System.out.println("a + b = " + operation.sum(a, b));
+        System.out.println("a - b = " + operation.subtract(a, b));
+        System.out.println("a * b = " + operation.multiply(a, b));
+        System.out.println("a / b = " + operation.division(a, b));
+        System.out.println("sqrt(a + b) = " + operation.sqrt(a, b));
+        System.out.println("a ^ b = " + operation.pow(a, b));
+    }
+}

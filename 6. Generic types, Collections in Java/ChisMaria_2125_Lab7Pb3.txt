@@ -1,0 +1,106 @@
+public class SetterGetter<T> {
+    private T attribute;
+
+    public void setAttribute(T attribute) {
+        this.attribute = attribute;
+    }
+
+    public T getAttribute() {
+        return attribute;
+    }
+
+}
+
+public class Child {
+    SetterGetter<String> nameChildSetterGetter = new SetterGetter<>();
+    SetterGetter<Integer> ageChildSetterGetter = new SetterGetter<>();
+
+    public void setAttribute(int childAge, String childName) {
+        nameChildSetterGetter.setAttribute(childName);
+        ageChildSetterGetter.setAttribute(childAge);
+    }
+
+    public String getAttribute() {
+        return nameChildSetterGetter.getAttribute() + " " + ageChildSetterGetter.getAttribute();
+    }
+}
+
+
+public class Adult extends SetterGetter {
+    SetterGetter<String> nameAdultSetterGetter = new SetterGetter<>();
+    SetterGetter<Integer> ageAdultSetterGetter = new SetterGetter<>();
+
+    public void setAttribute(int adultAge, String adultName) {
+        nameAdultSetterGetter.setAttribute(adultName);
+        ageAdultSetterGetter.setAttribute(adultAge);
+    }
+
+    public String getAttribute() {
+        return nameAdultSetterGetter.getAttribute() + " " + ageAdultSetterGetter.getAttribute();
+    }
+}
+
+public class Retired extends SetterGetter {
+    SetterGetter<String> nameRetiredSetterGetter = new SetterGetter<>();
+    SetterGetter<Integer> ageRetiredSetterGetter = new SetterGetter<>();
+
+    public void setAttribute(int ageRetired, String nameRetired) {
+        nameRetiredSetterGetter.setAttribute(nameRetired);
+        ageRetiredSetterGetter.setAttribute(ageRetired);
+    }
+
+    public String getAttribute() {
+        return nameRetiredSetterGetter.getAttribute() + " " + ageRetiredSetterGetter.getAttribute();
+    }
+}
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<Child> children = new ArrayList<>();
+        System.out.println("Enter the kids: ");
+        for (int i = 0; i < 2; i++) {
+            String name = sc.nextLine();
+            int age = sc.nextInt();
+            sc.nextLine();
+            Child child = new Child();
+            child.setAttribute(age, name);
+            children.add(child);
+        }
+
+        System.out.println("Enter the adults: ");
+        List<Adult> adults = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            String name = sc.nextLine();
+            int age = sc.nextInt();
+            sc.nextLine();
+            Adult adult = new Adult();
+            adult.setAttribute(age, name);
+            adults.add(adult);
+        }
+        System.out.println("Enter the retirees: ");
+        List<Retired> retirees = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            String name = sc.nextLine();
+            int age = sc.nextInt();
+            sc.nextLine();
+            Retired retired = new Retired();
+            retired.setAttribute(age, name);
+            retirees.add(retired);
+        }
+        System.out.println("The people you entered are: ");
+        for (Child child : children) {
+            System.out.println(child.getAttribute());
+        }
+        for (Adult adult : adults) {
+            System.out.println(adult.getAttribute());
+        }
+        for (Retired retired : retirees) {
+            System.out.println(retired.getAttribute());
+        }
+    }
+}

@@ -1,0 +1,118 @@
+abstract class SpatialShape {
+    String name;
+
+    abstract double surface();
+
+    public String toString() {
+        return name;
+    }
+
+}
+
+public class Sphere extends SpatialShape {
+    private int r;
+
+    double surface() {
+        double pi = 3.14159265359;
+        return 4 * pi * Math.pow(r, 2);
+    }
+
+    public int getR() {
+        return r;
+    }
+
+    public void setR(int r) {
+        this.r = r;
+    }
+
+    @Override
+    public String toString() {
+        return name + " r = " + r;
+    }
+}
+
+public class Cube extends SpatialShape {
+    private int l;
+
+    double surface() {
+        return 6 * Math.pow(l, 2);
+    }
+
+    public int getL() {
+        return l;
+    }
+
+    public void setL(int l) {
+        this.l = l;
+    }
+    @Override
+    public String toString() {
+        return name + " l = " + l;
+    }
+}
+
+public class Cylinder extends SpatialShape {
+    private int h, rb;
+
+    double surface() {
+        double pi = 3.14159265359;
+        return 2 * pi * rb * (rb + h);
+    }
+
+    public int getH() {
+        return h;
+    }
+
+    public int getRb() {
+        return rb;
+    }
+
+    public void setH(int h) {
+        this.h = h;
+    }
+
+    public void setRb(int rb) {
+        this.rb = rb;
+    }
+
+    @Override
+    public String toString() {
+        return name + " h = " + h + " rb = " + rb;
+    }
+}
+
+public interface Paint {
+    final static float paintOnTheSurfaceUnit = 1;
+}
+
+public class PainterDefault implements Paint {
+
+    public double getPaintQuantity(SpatialShape spatialShape) {
+        double surface = spatialShape.surface();
+        return Paint.paintOnTheSurfaceUnit * surface;
+    }
+}
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PainterDefault painterDefault = new PainterDefault();
+        Sphere sphere = new Sphere();
+        Cube cube = new Cube();
+        Cylinder cylinder = new Cylinder();
+        int[] data = new int[4];
+        for (int i = 0; i < 4; i++) {
+            data[i] = sc.nextInt();
+        }
+        sphere.setR(data[0]);
+        cube.setL(data[1]);
+        cylinder.setH(data[2]);
+        cylinder.setRb(data[3]);
+        System.out.println(painterDefault.getPaintQuantity(cube));
+        System.out.println(painterDefault.getPaintQuantity(sphere));
+        System.out.println(painterDefault.getPaintQuantity(cylinder));
+
+    }
+}

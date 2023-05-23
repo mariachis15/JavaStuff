@@ -1,0 +1,108 @@
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Hashtable;
+import java.util.List;
+
+public class UserFile {
+    private String name;
+    private String extension;
+    private int fileType;
+    private int dimension;
+
+    public UserFile() {
+
+    }
+
+    public UserFile(String name, String extension, int fileType, int dimension) {
+        this.name = name;
+        this.extension = extension;
+        this.fileType = fileType;
+        this.dimension = dimension;
+    }
+
+    public static List<UserFile> sortByDimension(List<UserFile> files) {
+        for (int i = 0; i < files.size() - 1; i++) {
+            for (int j = i + 1; j < files.size(); j++) {
+                if (files.get(i).getDimension() > files.get(j).getDimension()) {
+                    Collections.swap(files, i, j);
+                }
+            }
+        }
+        return files;
+    }
+
+    @Override
+    public String toString() {
+        return "UserFile -> " +
+                "name : " + name +
+                ", extension: " + extension +
+                ", fileType : " + fileType +
+                ", dimension : " + dimension;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
+
+    public int getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(int fileType) {
+        this.fileType = fileType;
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
+    }
+}
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Hashtable<String, String> fileTypes = new Hashtable<>();
+        //0 - image     1 - text       2 - app
+        fileTypes.put("image", ".jpg, .jpeg, .png, .gif");
+        fileTypes.put("text", ".txt, .doc, .docx, .pdf");
+        fileTypes.put("app", ".exe, .msi, .apk, .dmg");
+        for (Map.Entry<String, String> fileType : fileTypes.entrySet()) {
+            System.out.println(fileType.getKey() + ": " + fileType.getValue());
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("n = ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter the objects: ");
+        List<UserFile> files = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            UserFile file = new UserFile();
+            file.setName(sc.nextLine());
+            file.setExtension(sc.nextLine());
+            file.setFileType(sc.nextInt());
+            file.setDimension(sc.nextInt());
+            sc.nextLine();
+            files.add(file);
+        }
+        files = UserFile.sortByDimension(files);
+        for (UserFile file : files) {
+            System.out.println(file);
+        }
+    }
+}

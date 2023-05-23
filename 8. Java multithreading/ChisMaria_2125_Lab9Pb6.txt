@@ -1,0 +1,94 @@
+import java.io.*;
+
+public class FileWrapper {
+    private File file;
+    private boolean available = true;
+
+    public FileWrapper(String name) {
+        file = new File(name);
+    }
+
+    public synchronized void writeMessage(String message) throws InterruptedException, IOException {
+        if (!available) {
+            wait();
+        }
+        available = false;
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(message);
+        fileWriter.close();
+        available = true;
+        notifyAll();
+    }
+
+    public synchronized void readMessage() throws InterruptedException, IOException {
+        if (!available) {
+            wait();
+        }
+        available = false;
+        int ch;
+        FileReader reader = new FileReader(file);
+        while ((ch = reader.read()) != -1) {
+            System.out.print((char) ch);
+        }
+        reader.close();
+        available = true;
+        notifyAll();
+    }
+
+
+}
+
+
+import java.io.IOException;
+
+public class Writer extends Thread {
+    private FileWrapper fileWrapper;
+    private String message;
+
+    public Writer(FileWrapper fileWrapper, String message) {
+        this.message = message;
+        this.fileWrapper = fileWrapper;
+    }
+
+    public void run() {
+        try {
+            fileWrapper.writeMessage(message);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+
+import java.io.IOException;
+
+public class Reader extends Thread {
+    private FileWrapper fileWrapper;
+
+    public Reader(FileWrapper fileWrapper) {
+        this.fileWrapper = fileWrapper;
+    }
+
+    public void run() {
+        try {
+            fileWrapper.readMessage();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        FileWrapper fileWrapper = new FileWrapper("file.txt");
+        Writer writer = new Writer(fileWrapper, "hello world!");
+        writer.start();
+        Reader reader = new Reader(fileWrapper);
+        reader.start();
+    }
+}

@@ -1,0 +1,91 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class NumbersContainer {
+    private List<Integer> randomNumbers;
+    private Random r;
+    private boolean available;
+
+    public NumbersContainer() {
+        randomNumbers = new ArrayList<>();
+        r = new Random();
+    }
+
+    public synchronized void addNewRandomNumber() {
+        while (!available) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        randomNumbers.add(r.nextInt(31));
+        available = false;
+        notifyAll();
+    }
+
+    public synchronized void showCircleSurface() {
+        while (available) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (randomNumbers.size() > 0) {
+            List<Integer> visited = new ArrayList<>();
+            for (Integer i : randomNumbers) {
+                visited.add(i);
+                if (i % 3 == 0) {
+                    System.out.println("surface for R = " + i + " : " + Math.PI * i * i);
+                    break;
+                }
+            }
+            randomNumbers.removeAll(visited);
+        }
+        available = true;
+        notifyAll();
+    }
+}
+
+
+public class Generator extends Thread{
+    private NumbersContainer numbersContainer;
+
+    public Generator(NumbersContainer numbersContainer) {
+        this.numbersContainer = numbersContainer;
+    }
+    public void run() {
+        for (int i = 0; i < 30; i++) {
+            numbersContainer.addNewRandomNumber();
+        }
+    }
+}
+
+
+
+public class Calculator extends Thread {
+    private NumbersContainer numbersContainer;
+
+    public Calculator(NumbersContainer numbersContainer) {
+        this.numbersContainer = numbersContainer;
+    }
+
+    public void run() {
+        for (int i = 0; i < 30; i++) {
+            numbersContainer.showCircleSurface();
+        }
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        NumbersContainer numbersContainer = new NumbersContainer();
+        Generator generator = new Generator(numbersContainer);
+        Calculator calculator = new Calculator(numbersContainer);
+        generator.start();
+        calculator.start();
+    }
+}

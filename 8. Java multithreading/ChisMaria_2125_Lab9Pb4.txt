@@ -1,0 +1,59 @@
+public class Number {
+    private int number;
+    private boolean available;
+
+    public Number(int number) {
+        available = true;
+        this.number = number;
+    }
+
+    public synchronized void incDec() {
+        if (!available) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        number++;
+        number--;
+        available = true;
+        notifyAll();
+    }
+
+    public int getNumber() {
+        return number;
+    }
+}
+
+
+public class IncrementerDecrementer extends Thread {
+    private Number number;
+
+    public IncrementerDecrementer(Number number) {
+        this.number = number;
+    }
+
+    public void run() {
+        number.incDec();
+    }
+
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        Number number = new Number(23);
+        IncrementerDecrementer i1 = new IncrementerDecrementer(number);
+        IncrementerDecrementer i2 = new IncrementerDecrementer(number);
+        IncrementerDecrementer i3 = new IncrementerDecrementer(number);
+        IncrementerDecrementer i4 = new IncrementerDecrementer(number);
+        IncrementerDecrementer i5 = new IncrementerDecrementer(number);
+        i1.start();
+        i2.start();
+        i3.start();
+        i4.start();
+        i5.start();
+        System.out.println(number.getNumber());
+    }
+}

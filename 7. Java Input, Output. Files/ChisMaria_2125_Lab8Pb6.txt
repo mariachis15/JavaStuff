@@ -1,0 +1,112 @@
+public class Person {
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String dateOfBirth;
+    private String facebookLink;
+
+    public Person(){
+
+    }
+
+    public Person(String firstName, String lastName, String phoneNumber, String dateOfBirth, String facebookLink) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.facebookLink = facebookLink;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getFacebookLink() {
+        return facebookLink;
+    }
+
+    public void setFacebookLink(String facebookLink) {
+        this.facebookLink = facebookLink;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", facebookLink='" + facebookLink + '\'' +
+                '}';
+    }
+}
+
+
+
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(new File("Persons.csv"));
+        sc.useDelimiter("/");
+        String[] fields = new String[10000];
+        int index = 0;
+        while (sc.hasNext()) {
+            fields[index++] = sc.next();
+        }
+        List<Person> persons = new ArrayList<>();
+        for (int i = 0; i < index; i += 5) {
+            Person person = new Person(fields[i], fields[i + 1], fields[i + 2], fields[i + 3], fields[i + 4]);
+            persons.add(person);
+        }
+        sc.close();
+        FileWriter fileWriter1 = new FileWriter("decembers.txt", true);
+        FileWriter fileWriter2 = new FileWriter("andreiNicolae.txt", true);
+        BufferedWriter bufferedWriter1 = new BufferedWriter(fileWriter1);
+        BufferedWriter bufferedWriter2 = new BufferedWriter(fileWriter2);
+        for (Person person : persons) {
+            if (person.getDateOfBirth().contains("dec")) {
+                bufferedWriter1.append(person.toString());
+                bufferedWriter1.append("\n");
+            }
+            if (person.getFirstName().equals("Nicolae") || person.getFirstName().equals("Andrei")) {
+                bufferedWriter2.append(person.toString());
+                bufferedWriter2.append("\n");
+            }
+        }
+        bufferedWriter1.close();
+        bufferedWriter2.close();
+    }
+}
