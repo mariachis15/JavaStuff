@@ -1,0 +1,51 @@
+import java.awt.*;
+
+public class MyCanvas extends Canvas {
+    MyCanvas() {
+        this.setSize(new Dimension(300, 500));
+        this.setVisible(true);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        int diameter = Math.min(getWidth(), getHeight());
+        int x = (getWidth() - diameter) / 2;
+        int y = (getHeight() - diameter) / 2;
+        g.setColor(Color.red);
+        g.fillOval(x, y, diameter, diameter);
+        setVisible(true);
+    }
+}
+
+
+
+
+import javax.swing.*;
+
+public class MyFrame extends JFrame {
+    MyCanvas canvas;
+
+    MyFrame(String title) {
+        super(title);
+    }
+
+    public void paint() {
+        canvas = new MyCanvas();
+
+        this.setSize(canvas.getWidth(), canvas.getHeight());
+        this.setLocation(500, 250);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        add(canvas);
+        this.setVisible(true);
+    }
+}
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        MyFrame frame = new MyFrame("MY CANVAS");
+        frame.paint();
+    }
+
+}

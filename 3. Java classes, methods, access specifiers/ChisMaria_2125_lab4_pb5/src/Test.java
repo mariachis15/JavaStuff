@@ -1,0 +1,37 @@
+import javax.swing.plaf.metal.OceanTheme;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Test {
+
+    public static String transformFunction(String str) {
+        return "String";
+    }
+
+    public static void main(String[] args) {
+        String myString = String.join(" * ", "My", "favorite", "colour", "is", "pink.");
+        System.out.println(myString);
+        System.out.println();
+
+        String mySecondString = "Good night!";
+        IntStream codePointStream = mySecondString.chars();
+        codePointStream.mapToObj(Character::toChars).forEach(System.out::println);
+        System.out.println();
+
+        String myThirdString = "I \nlike \nchocolate";
+        Stream<String> lines = myThirdString.lines();
+        lines.forEach(System.out::println);
+        System.out.println();
+
+        String otherString = "maria";
+        int count = 6;
+        System.out.println(otherString.repeat(count));
+        System.out.println();
+
+        System.out.println(otherString.transform(Test::transformFunction));
+
+
+    }
+
+
+}

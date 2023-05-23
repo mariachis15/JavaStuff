@@ -1,0 +1,308 @@
+public class Publication implements Comparable<Publication> {
+    static String title;
+    static String author;
+    static int publicationYear;
+
+    public Publication(String title, String author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getPublicationYear() {
+        return publicationYear;
+    }
+
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
+    @Override
+    public int compareTo(Publication o) {
+        return this.title.compareTo(o.title);
+    }
+}
+
+
+import java.util.Objects;
+
+public class Book extends Publication {
+    String category;
+
+    public Book(String title, String author, int publicationYear, String category) {
+        super(title, author, publicationYear);
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Book -> " +
+                "title: " + title +
+                ", author: " + author +
+                ", publication year: " + publicationYear +
+                ", category: " + category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(publicationYear, book.publicationYear) && Objects.equals(category, book.category);
+    }
+
+}
+
+
+import java.util.Objects;
+
+public class TextBook extends Publication {
+    static double difficultyLevel;
+
+    public TextBook(String title, String author, int publicationYear, double difficultyLevel) {
+        super(title, author, publicationYear);
+        this.difficultyLevel = difficultyLevel;
+    }
+
+    public double getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public void setDifficultyLevel(double difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
+
+    @Override
+    public String toString() {
+        return "TextBook -> " +
+                "title: " + title +
+                ", author: " + author +
+                ", publication year: " + publicationYear +
+                ", difficulty level: " + difficultyLevel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TextBook textBook = (TextBook) o;
+        return Objects.equals(title, textBook.title) && Objects.equals(author, textBook.author) && Objects.equals(publicationYear, textBook.publicationYear) && Objects.equals(difficultyLevel, textBook.difficultyLevel);
+    }
+}
+
+
+import java.util.Objects;
+
+public class Article extends Publication {
+    String source;
+
+    public Article(String title, String author, int publicationYear, String source) {
+        super(title, author, publicationYear);
+        this.source = source;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    @Override
+    public String toString() {
+        return "Article -> " +
+                "title: " + title +
+                ", author: " + author +
+                ", publication year: " + publicationYear +
+                ", source: " + source;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Article article = (Article) o;
+        return Objects.equals(title, article.title) && Objects.equals(author, article.author) && Objects.equals(publicationYear, article.publicationYear) && Objects.equals(source, article.source);
+    }
+
+}
+
+
+import java.util.Objects;
+
+public class MediaResource extends Publication {
+    String type;
+
+    public MediaResource(String title, String author, int publicationYear, String type) {
+        super(title, author, publicationYear);
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Media Resource -> " +
+                "title: " + title +
+                ", author: " + author +
+                ", publication year: " + publicationYear +
+                ", type: " + type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaResource that = (MediaResource) o;
+        return Objects.equals(title, that.title) && Objects.equals(author, that.author) && Objects.equals(publicationYear, that.publicationYear) && Objects.equals(type, that.type);
+    }
+
+}
+
+
+import java.util.Objects;
+
+public class Magazine extends Publication {
+    String theme;
+
+    public Magazine(String title, String author, int publicationYear, String theme) {
+        super(title, author, publicationYear);
+        this.theme = theme;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    @Override
+    public String toString() {
+        return "Magazine -> " +
+                "title: " + title +
+                ", author: " + author +
+                ", publication year: " + publicationYear +
+                ", theme: " + theme;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Magazine magazine = (Magazine) o;
+        return Objects.equals(title, magazine.title) && Objects.equals(author, magazine.author) && Objects.equals(publicationYear, magazine.publicationYear) && Objects.equals(theme, magazine.theme);
+    }
+
+}
+
+
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+public class VirtualLibrary<T> {
+    private SortedSet<T> stock;
+
+    public VirtualLibrary() {
+        stock = new TreeSet<>();
+    }
+
+    public void addItem(T item) {
+        stock.add(item);
+    }
+
+    public SortedSet<T> getStock() {
+        return stock;
+    }
+
+    public void addItems(List<T> items) {
+        stock.addAll(items);
+    }
+
+    public T getItem(int i) {
+        int counter = 0;
+        for (T item : stock) {
+            if (counter == i) {
+                return item;
+            }
+            counter++;
+        }
+        return null;
+    }
+
+    public boolean verifyItem(T object) {
+        for (T item : stock) {
+            if (object.equals(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        VirtualLibrary<Publication> virtualLibrary = new VirtualLibrary<>();
+        virtualLibrary.addItem(new Magazine("Vogue", "Condé Nast Publications", 2021, "fashion"));
+        virtualLibrary.addItem(new Book("Pride and Prejudice", "Jane Austen", 1813, "romance"));
+        for (Publication publication : virtualLibrary.getStock()) {
+            System.out.println(publication);
+        }
+        List<Publication> publications = new ArrayList<>();
+        publications.add(new Book("The Lord of the Rings", "J.R.R. Tolkien", 1954, "SF"));
+        publications.add(new Article("Butter and Margarine: What's the difference?", "Kit Chapman", 2023, "RSC Education"));
+        publications.add(new MediaResource("Medical Student Outreach Program", "American Medical Association", 2022, "podcast"));
+        publications.add(new Magazine("The New Yorker", "Condé Nast Publications", 1985, "American culture"));
+        publications.add(new TextBook("Spark Mathematics - Learner's book", "Alex O. Obondi", 2017, 7));
+        virtualLibrary.addItems(publications);
+        for (Publication publication : publications) {
+            System.out.println(publication);
+        }
+        System.out.println();
+        int position = 3;
+        System.out.println("The item from position " + position + " is: " + virtualLibrary.getItem(position));
+        System.out.println();
+        Book newBook = new Book("The of the Rings", "J.R.R. Tolkien", 1954, "SF");
+        System.out.println("The object you want to find is: " + newBook);
+        if (virtualLibrary.verifyItem(newBook) == true) {
+            System.out.println("The object exists in the library.");
+        } else System.out.println("The object does not exist in the library.");
+    }
+}

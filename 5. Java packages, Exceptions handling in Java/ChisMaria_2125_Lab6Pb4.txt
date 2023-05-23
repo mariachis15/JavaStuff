@@ -1,0 +1,40 @@
+public class SuperException extends Exception {
+    public SuperException(String s) {
+        super("A SuperException exception was generated.");
+    }
+}
+
+public class LittleException extends SuperException {
+    public LittleException() {
+        super("A LittleException exception was generated.");
+    }
+}
+
+public class Method {
+    public static void a() throws LittleException {
+        throw new LittleException();
+    }
+
+    public static void b() throws SuperException {
+        throw new SuperException("A LittleException exception was generated.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        try {
+            Method.a();
+        } catch (LittleException e) {
+            System.out.println("We got a LittleException exception.");
+        }/*catch(SuperException e) {
+            System.out.println("We got a SuperException exception.");
+        }*/
+        try {
+            Method.b();
+        } catch (SuperException e) {
+            System.out.println("We got a SuperException exception.");
+        }
+    }
+
+}

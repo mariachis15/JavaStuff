@@ -1,0 +1,80 @@
+package Package;
+
+public interface Int1 {
+    int a = 2;
+    int b = 6;
+
+    int sum(int num1, int num2);
+
+}
+
+package Package;
+
+public interface Int2 {
+    double a = 3.3;
+    double b = 5.01;
+
+    double product(double num1, double num2);
+}
+
+package Package;
+
+public class Class1 {
+    protected double n1, n2;
+
+    public Class1(double n1, double n2) {
+        this.n1 = n1;
+        this.n2 = n2;
+    }
+
+    public double getN1() {
+        return n1;
+    }
+
+    public void setN1(double n1) {
+        this.n1 = n1;
+    }
+
+    public double getN2() {
+        return n2;
+    }
+
+    public void setN2(double n2) {
+        this.n2 = n2;
+    }
+}
+
+import Package.*;
+
+public class Class2 extends Class1 implements Int1, Int2 {
+
+    public Class2(double n1, double n2) {
+        super(n1, n2);
+    }
+
+    public int sum(int num1, int num2) {
+        return num1 + num2;
+    }
+
+    public double product(double num1, double num2) {
+        return num1 * num2;
+    }
+
+}
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num1 = sc.nextInt();
+        int num2 = sc.nextInt();
+        Class2 class2 = new Class2(num1, num2);
+        System.out.println(class2.sum(num1, num2));
+        double num3 = sc.nextDouble();
+        double num4 = sc.nextDouble();
+        System.out.println(class2.product(num3, num4));
+
+    }
+
+}

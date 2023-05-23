@@ -1,0 +1,53 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class MyTabbedView extends JFrame {
+    final static String TAB1 = "CANVAS";
+    final static String TAB2 = "FONT";
+    final static String TAB3 = "GEOMETRIC SHAPE";
+
+    public void addComponentToPane(Container pane) {
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        JPanel canvas = new JPanel();
+        canvas.setBackground(new Color(171, 250, 250));
+
+        JPanel fontPanel = new JPanel();
+        String[] fonts = {"Arial", "Calibri", "Dotum", "Gulim", "Helvetica", "Times New Roman"};
+        JComboBox fontBox = new JComboBox(fonts);
+        String[] colors = {"black", "blue", "green", "magenta", "orange", "pink", "yellow"};
+        JComboBox colorBox = new JComboBox(colors);
+        fontPanel.add(fontBox);
+        fontPanel.add(new JTextField("Text size", 20));
+        fontPanel.add(colorBox);
+
+        JPanel shapePanel = new JPanel();
+        String[] shapes = {"circle", "rectangle", "square", "triangle"};
+        JComboBox shapesBox = new JComboBox(shapes);
+        shapePanel.add(shapesBox);
+        shapePanel.add(new JTextField("side/radius", 20));
+
+
+        tabbedPane.addTab(TAB1, canvas);
+        tabbedPane.addTab(TAB2, fontPanel);
+        tabbedPane.addTab(TAB3, shapePanel);
+
+        pane.add(tabbedPane, BorderLayout.CENTER);
+    }
+}
+
+
+import javax.swing.*;
+
+public class Main extends JFrame {
+    public static void main(String[] args) {
+        MyTabbedView firstTry = new MyTabbedView();
+        JFrame frame = new JFrame("Tabbed View");
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        firstTry.addComponentToPane(frame.getContentPane());
+        frame.setVisible(true);
+
+    }
+}

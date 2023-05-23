@@ -1,0 +1,103 @@
+public class Fraction {
+    protected int a, b;
+
+    Fraction() {
+        a = 0;
+        b = 1;
+    }
+
+    Fraction(int a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    public int gcd(int a, int b) {
+        while (b != 0) {
+            int r = a % b;
+            a = b;
+            b = r;
+        }
+        return a;
+    }
+
+    public Fraction simplify() {
+        int simplifier = gcd(a, b);
+        return new Fraction(a / simplifier, b / simplifier);
+    }
+
+    public String toString() {
+        return a + "/" + b;
+    }
+
+    public int getA() {
+        return a;
+    }
+
+    public int getB() {
+        return b;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
+    public void setB(int b) {
+        this.b = b;
+    }
+}
+
+public class ExtendedFraction extends Fraction {
+    ExtendedFraction(int a, int b) {
+        super(a, b);
+    }
+
+    @Override
+    public int gcd(int a, int b) {
+        while (a != b) {
+            if (a > b) {
+                a = a - b;
+            } else {
+                b = b - a;
+            }
+        }
+        return a;
+    }
+
+    public boolean superunitary(int a, int b) {
+        if (a > b) {
+            return true;
+        } else
+            return false;
+
+    }
+}
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("n = ");
+        int n = sc.nextInt();
+        Fraction[] fraction = new Fraction[n];
+        for (int i = 0; i < n; i++) {
+            fraction[i] = new Fraction();
+            fraction[i].setA(sc.nextInt());
+            fraction[i].setB(sc.nextInt());
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.println(fraction[i] + " " + fraction[i].simplify());
+        }
+        int a, b;
+        System.out.println("a = ");
+        a = sc.nextInt();
+        System.out.println("b = ");
+        b = sc.nextInt();
+        ExtendedFraction extendedFraction = new ExtendedFraction(a, b);
+        System.out.println(extendedFraction.simplify());
+        if (extendedFraction.superunitary(a, b) == true) {
+            System.out.println("The fraction is superunitary.");
+        } else
+            System.out.println("The fraction is not superunitary.");
+    }
+}

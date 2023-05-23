@@ -1,0 +1,64 @@
+interface Arithmetic {
+
+    double sum(double a, double b);
+
+    double subtract(double a, double b);
+
+    double multiply(double a, double b);
+
+    double division(double a, double b);
+
+    double sqrt(double a, double b);
+
+    double pow(double a, double b);
+
+}
+
+public class Operation implements Arithmetic {
+    public double sum(double a, double b) {
+        return a + b;
+    }
+
+    public double subtract(double a, double b) {
+        return a - b;
+    }
+
+    public double multiply(double a, double b) {
+        return a * b;
+    }
+
+    public double division(double a, double b) {
+        return a / b;
+    }
+
+    public double sqrt(double a, double b) {
+        return Math.sqrt(a + b);
+    }
+
+    public double pow(double a, double b) {
+        return Math.pow(a, b);
+    }
+
+
+}
+
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Operation operation = new Operation();
+        System.out.print("a = ");
+        double a = sc.nextDouble();
+        System.out.print("b = ");
+        double b = sc.nextDouble();
+        System.out.println("a + b = " + operation.sum(a, b));
+        System.out.println("a - b = " + operation.subtract(a, b));
+        System.out.println("a * b = " + operation.multiply(a, b));
+        System.out.println("a / b = " + operation.division(a, b));
+        System.out.println("sqrt(a + b) = " + operation.sqrt(a, b));
+        System.out.println("a ^ b = " + operation.pow(a, b));
+    }
+}
