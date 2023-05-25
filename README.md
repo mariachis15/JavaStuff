@@ -1,4 +1,5 @@
 01. Basic Java Applications
+
      2. Write a Java application where you read from the keyboard an int value. Calculate and 
      display the factorial of the read number.
      
@@ -119,9 +120,8 @@
     operations.
     
     1’. Instead of an interface that contains all the aforementioned methods, implement 4 functional interfaces, one for 
-    each method.
+    each method. The interfaces will be implemented within a single class. Instantiate the class and check the implemented operations.
     
-    The interfaces will be implemented within a single class. Instantiate the class and check the implemented operations.
     1’’. Use the structure used at 1’ and implement lambda expressions to define the arithmetic operations. Check the 
     functionality.
     
