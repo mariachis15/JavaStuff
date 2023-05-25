@@ -230,6 +230,46 @@
     to each error which may occur upon check-up (specialized messages). For example, if the county letters group is 
     composed of 2 letters, the digit group cannot be of size 3. The last letters group cannot contain "I" and "O" on the first 
     and last position.
+    
+06. Generic types. Collections in Java
+    1. Creați o interfață denumită Generator<T> cu singura metodă next(T var). Implementați interfața pentru a permite 
+    generarea valorilor următoare în cazul aplicării asupra unor variabile de tipuri de date concrete (Integer, Character, etc.). 
+    Instanțierea clasei se va face în cadrul metodei main( ), care va fi poziționată într-o clasă distinctă. 
+     
+    2. Creați o clasă Calculator ce are implementate metode de adunare, scădere, înmulțire și împărțire. Metodele vor avea 
+    ca intrare tipuri de date generice și vor returna rezultatul conform acestor date. De exemplu, suma a doi întregi va 
+    returna tot un întreg, pentru două numere de tip float se va returna tot un float. Aplicarea metodelor de adunare și 
+    scădere este permisă și pe variabile de tip String, restul operațiilor fiind interzise pt. acest tip de date (mesaj de eroare). 
+
+    3. Implementați o aplicație în cadrul căreia să aveți o clasă SetterGetter generică ce permite setarea și returnarea 
+    valorilor atributelor pentru mai multe tipuri de obiecte. De exemplu, având clasele Copil, Adult și Pensionar, să se poată 
+    seta și returna numele și vârsta acestora. Creați colecții cu intrări unice de obiecte de tip Copil, Adult, Pensionar pe care 
+    să le populați cu date citite din consolă. Afișați datele preluate în diferite moduri.
+
+    4. Implementati o clasa numita UserFile (denumire, extensie, tip, marime in bytes, constructori, mutatori si accesori). 
+    Tipurile de fisiere sunt predefinite si stocate intr-un obiect Hashtable (de ex. „imagine” =>0, „text” =>1, „aplicatie” =>2, 
+    etc.). Creați un șir de obiecte instanțiate din această clasă și citiți de la tastatură datele aferente. Afișați toate extensiile 
+    specifice tipurilor de fișiere predefinite. Ordonați lista de fișiere în funcție de mărime si afișați rezultatul.
+     
+    5. Scrieti o clasa Student cu campurile private nume, grupa, media, si metode getter/setter pentru campuri. In main(), 
+    plasata in alta clasa, creati o colectie de tip SortedSet, cu obiecte de tip Student, initializate cu valori citite de la tastatura, 
+    care sa pastreze elementele descrescator dupa medie si crescator dupa nume (cei care au aceeasi medie sa fie in ordine 
+    alfabetica). Parcurgeti cu for-loop colectia si afisati toate elementele. Parcurgeti apoi colectia cu un iterator si afisati toti 
+    studentii cu media >=8. Parcurgeti colectia cu forEach() si afisati toate datele studentilor dintr-o anumita grupa.
+
+    6. Scrieti o clasa Angajat cu campurile private nume, varsta, salariu si metode getter/setter pentru campuri. In metoda 
+    main(), plasata in alta clasa, creati o lista de obiecte de tip Angajat, initializate cu valori citite de la tastatura. Realizati 
+    mai multe sortari ale listei: 
+    - crescator dupa nume, folosind interfata Comparable
+    - descrescator dupa varsta, folosind interfata Comparable si o expresie lambda
+    - crescator dupa nume si descrescator dupa salariu, folosind interfata Comparator
+     
+    7. Creați o clasă generică numită VirtualLibrary care gestionează un SortedSet de intrări. Tipurile de intrări sunt Carte, 
+    Articol, MediaResource, Revista și Manual. Implementați clasele specifice pentru fiecare tip de intrare, fiecare dintre ele 
+    fiind o subclasă de Publicatie.
+    VirtualLibrary are metode pentru a adăuga, adăuga mai multe, returna o anumită intrare și verifica dacă există o intrare 
+    în bibliotecă.
+    În metoda main() , creați o instanță a clasei VirtualLibrary și folosiți facilitățile oferite
 
 07. Java Input / Output. Files
     1. Using a KB reading mechanism (BufferedReader/InputStreamReader) input: a message of String type, a day as an 
